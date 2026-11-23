@@ -1,0 +1,2445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trợ Lý Số Công Tác Đội - Liên Đội Trường Tiểu Học Lê Thế Hiếu</title>
+    <!-- Google Fonts: Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --red-primary: #D32F2F;
+            --red-dark: #B71C1C;
+            --red-light: #FFEBEE;
+            --yellow-star: #FBC02D;
+            --yellow-light: #FFF9C4;
+            --yellow-dark: #F57F17;
+            --blue-youth: #1976D2;
+            --blue-dark: #0D47A1;
+            --blue-light: #E3F2FD;
+            --green-success: #2E7D32;
+            --bg-body: #F4F6F9;
+            --bg-card: #FFFFFF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+            --shadow-red: 0 6px 18px rgba(211, 47, 47, 0.25);
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ================= HEADER ================= */
+        .app-header {
+            background: linear-gradient(135deg, #B71C1C 0%, #D32F2F 55%, #E53935 100%);
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(183, 28, 28, 0.3);
+            border-bottom: 4px solid var(--yellow-star);
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(251, 192, 45, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 18px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .emblem-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #FFF59D, #FBC02D 70%, #F57F17);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 0 0 3px #FFFFFF;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .emblem-badge i {
+            font-size: 28px;
+            color: var(--red-primary);
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+        }
+
+        .brand-text .org-subtitle {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--yellow-light);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .brand-text h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            margin: 2px 0 4px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            line-height: 1.25;
+        }
+
+        .brand-text .school-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.22);
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(251, 192, 45, 0.45);
+        }
+
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .motto-banner {
+            background: rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(8px);
+            border-left: 4px solid var(--yellow-star);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-style: italic;
+            color: #FFFDE7;
+            max-width: 480px;
+            text-align: right;
+        }
+
+        .live-meta-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .meta-pill {
+            background: #FFFFFF;
+            color: var(--text-main);
+            padding: 5px 12px;
+            border-radius: 99px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .meta-pill i {
+            color: var(--red-primary);
+        }
+
+        .meta-pill.blue-pill i {
+            color: var(--blue-youth);
+        }
+
+        /* ================= TOP QUICK ACTION BAR ================= */
+        .quick-toolbar {
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 90;
+        }
+
+        .toolbar-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 10px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .toolbar-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--blue-dark);
+        }
+
+        .toolbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-red {
+            background: var(--red-primary);
+            color: #FFFFFF;
+            box-shadow: var(--shadow-red);
+        }
+
+        .btn-red:hover {
+            background: var(--red-dark);
+        }
+
+        .btn-blue {
+            background: var(--blue-youth);
+            color: #FFFFFF;
+        }
+
+        .btn-blue:hover {
+            background: var(--blue-dark);
+        }
+
+        .btn-yellow {
+            background: var(--yellow-star);
+            color: #1E293B;
+            font-weight: 700;
+        }
+
+        .btn-yellow:hover {
+            background: #F9A825;
+        }
+
+        .btn-outline {
+            background: #FFFFFF;
+            color: var(--text-main);
+            border-color: #CBD5E1;
+        }
+
+        .btn-outline:hover {
+            background: #F8FAFC;
+            border-color: var(--blue-youth);
+            color: var(--blue-youth);
+        }
+
+        /* ================= MAIN 2-COLUMN WORKSPACE ================= */
+        .main-workspace {
+            max-width: 1440px;
+            width: 100%;
+            margin: 22px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.12fr 0.88fr;
+            gap: 24px;
+            align-items: start;
+            flex: 1;
+        }
+
+        .panel-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 16px 22px;
+            background: linear-gradient(to right, #FFF5F5, #FFFFFF);
+            border-bottom: 2px solid #FEE2E2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .panel-header.blue-header {
+            background: linear-gradient(to right, #EFF6FF, #FFFFFF);
+            border-bottom: 2px solid #DBEAFE;
+        }
+
+        .panel-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--red-dark);
+        }
+
+        .panel-header.blue-header .panel-title {
+            color: var(--blue-dark);
+        }
+
+        .step-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--red-primary);
+            color: #FFFFFF;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .panel-header.blue-header .step-badge {
+            background: var(--blue-youth);
+        }
+
+        .panel-body {
+            padding: 20px 22px;
+        }
+
+        /* ================= CATEGORY TABS (5 NGHIỆP VỤ) ================= */
+        .section-label {
+            font-size: 0.84rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .cat-tab {
+            background: #F8FAFC;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            user-select: none;
+        }
+
+        .cat-tab i {
+            font-size: 1.25rem;
+            color: var(--blue-youth);
+            transition: var(--transition);
+        }
+
+        .cat-tab .cat-name {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.25;
+        }
+
+        .cat-tab:hover {
+            border-color: var(--red-primary);
+            background: var(--red-light);
+            transform: translateY(-2px);
+        }
+
+        .cat-tab.active {
+            background: linear-gradient(135deg, var(--red-primary), var(--red-dark));
+            border-color: var(--red-dark);
+            color: #FFFFFF;
+            box-shadow: var(--shadow-red);
+        }
+
+        .cat-tab.active i,
+        .cat-tab.active .cat-name {
+            color: #FFFFFF;
+        }
+
+        /* Sub-task pills */
+        .subtask-box {
+            background: #F8FAFC;
+            border: 1px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+        }
+
+        .subtask-header {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--blue-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .subtask-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .subtask-chip {
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            border-radius: 99px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .subtask-chip:hover {
+            border-color: var(--blue-youth);
+            color: var(--blue-youth);
+            background: var(--blue-light);
+        }
+
+        .subtask-chip.active {
+            background: var(--blue-youth);
+            border-color: var(--blue-youth);
+            color: #FFFFFF;
+            box-shadow: 0 3px 8px rgba(25, 118, 210, 0.25);
+        }
+
+        /* ================= FORM CONTROLS ================= */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 7px;
+        }
+
+        .form-label span.label-left {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .form-label i {
+            color: var(--red-primary);
+            font-size: 0.9rem;
+        }
+
+        .badge-hint {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--blue-youth);
+            background: var(--blue-light);
+            padding: 2px 8px;
+            border-radius: 99px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 13px;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            color: var(--text-main);
+            background: #FFFFFF;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--blue-youth);
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.14);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 105px;
+            line-height: 1.55;
+        }
+
+        /* Multi-select checkboxes / chips */
+        .multi-chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .check-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #F8FAFC;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 8px;
+            font-size: 0.81rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            user-select: none;
+            transition: var(--transition);
+        }
+
+        .check-chip:hover {
+            border-color: var(--red-primary);
+            background: #FFF5F5;
+        }
+
+        .check-chip.selected {
+            background: var(--red-light);
+            border-color: var(--red-primary);
+            color: var(--red-dark);
+        }
+
+        .check-chip i {
+            font-size: 0.82rem;
+        }
+
+        /* Practical conditions grid */
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background: #F8FAFC;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .cond-item label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .cond-item input,
+        .cond-item select {
+            width: 100%;
+            padding: 7px 10px;
+            font-size: 0.82rem;
+            border: 1px solid #CBD5E1;
+            border-radius: 7px;
+            font-family: inherit;
+            background: #FFFFFF;
+        }
+
+        /* Quick suggestion tags for textarea */
+        .quick-tags-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .quick-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: #EFF6FF;
+            color: var(--blue-dark);
+            border: 1px solid #BFDBFE;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .quick-tag:hover {
+            background: var(--blue-youth);
+            color: #FFFFFF;
+            border-color: var(--blue-youth);
+        }
+
+        /* Radio option cards for Tone & Format */
+        .option-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .option-cards-grid.cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .opt-card {
+            border: 1.5px solid #CBD5E1;
+            background: #FFFFFF;
+            border-radius: 9px;
+            padding: 9px 11px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .opt-card:hover {
+            border-color: var(--blue-youth);
+            background: #F8FAFC;
+        }
+
+        .opt-card.active {
+            border-color: var(--blue-youth);
+            background: var(--blue-light);
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.14);
+        }
+
+        .opt-card i {
+            margin-top: 2px;
+            color: var(--blue-youth);
+            font-size: 0.95rem;
+        }
+
+        .opt-card .opt-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.25;
+        }
+
+        .opt-card .opt-desc {
+            font-size: 0.71rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ================= RIGHT COLUMN: PROMPT OUTPUT & PREVIEW ================= */
+        .sticky-right {
+            position: sticky;
+            top: 68px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .output-tabs {
+            display: flex;
+            background: #F1F5F9;
+            padding: 4px;
+            border-radius: 9px;
+            gap: 4px;
+        }
+
+        .out-tab-btn {
+            padding: 6px 12px;
+            border-radius: 7px;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .out-tab-btn.active {
+            background: #FFFFFF;
+            color: var(--blue-dark);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .prompt-box-wrapper {
+            position: relative;
+            background: #0F172A;
+            border-radius: 12px;
+            border: 1px solid #1E293B;
+            overflow: hidden;
+        }
+
+        .prompt-box-topbar {
+            background: #1E293B;
+            padding: 9px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #334155;
+        }
+
+        .window-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot.r { background: #EF4444; }
+        .dot.y { background: #F59E0B; }
+        .dot.g { background: #10B981; }
+
+        .prompt-stats {
+            font-size: 0.74rem;
+            color: #94A3B8;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .prompt-content-area {
+            width: 100%;
+            min-height: 360px;
+            max-height: 460px;
+            overflow-y: auto;
+            padding: 16px;
+            font-family: 'Be Vietnam Pro', monospace;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            color: #F8FAFC;
+            white-space: pre-wrap;
+            word-break: break-word;
+            outline: none;
+        }
+
+        .prompt-content-area .hl-section {
+            color: #FBC02D;
+            font-weight: 800;
+        }
+
+        .prompt-content-area .hl-placeholder {
+            background: rgba(251, 192, 45, 0.2);
+            color: #FDE047;
+            padding: 1px 6px;
+            border-radius: 4px;
+            border: 1px dashed #FACC15;
+            font-weight: 600;
+        }
+
+        /* Structure Preview Box */
+        .structure-preview-area {
+            display: none;
+            background: #F8FAFC;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 12px;
+            padding: 16px;
+            min-height: 360px;
+            max-height: 460px;
+            overflow-y: auto;
+        }
+
+        .structure-preview-area.active {
+            display: block;
+        }
+
+        .prompt-box-wrapper.hidden {
+            display: none;
+        }
+
+        .preview-doc-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .preview-doc-header {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 10px;
+            text-align: center;
+            font-size: 0.75rem;
+            border-bottom: 1.5px dashed #CBD5E1;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+
+        .preview-outline-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .preview-outline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #F8FAFC;
+            padding: 9px 12px;
+            border-radius: 8px;
+            border-left: 3.5px solid var(--red-primary);
+            font-size: 0.82rem;
+        }
+
+        .preview-outline-item i {
+            color: var(--red-primary);
+            margin-top: 3px;
+        }
+
+        /* Primary Copy & Export Actions */
+        .output-actions-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .btn-copy-hero {
+            background: linear-gradient(135deg, #D32F2F 0%, #B71C1C 100%);
+            color: #FFFFFF;
+            padding: 13px 18px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.35);
+            transition: var(--transition);
+        }
+
+        .btn-copy-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(183, 28, 28, 0.45);
+        }
+
+        .btn-copy-hero.copied {
+            background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.35);
+        }
+
+        .export-sub-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .export-sub-actions .btn {
+            flex: 1;
+            font-size: 0.79rem;
+            padding: 8px 10px;
+        }
+
+        /* AI Direct Launch Links */
+        .ai-launcher-bar {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .ai-launcher-label {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .ai-links {
+            display: flex;
+            gap: 6px;
+        }
+
+        .ai-chip-link {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid #CBD5E1;
+            color: var(--text-main);
+            background: #F8FAFC;
+            transition: var(--transition);
+        }
+
+        .ai-chip-link:hover {
+            background: var(--blue-light);
+            border-color: var(--blue-youth);
+            color: var(--blue-dark);
+        }
+
+        /* ================= KHO MẪU CÔNG TÁC ĐỘI & LỊCH SỬ ================= */
+        .bottom-sections {
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto 32px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.35fr 0.65fr;
+            gap: 24px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .tpl-card {
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            background: #FFFFFF;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            position: relative;
+        }
+
+        .tpl-card:hover {
+            border-color: var(--red-primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .tpl-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.71rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 99px;
+            background: var(--red-light);
+            color: var(--red-dark);
+            width: fit-content;
+        }
+
+        .tpl-title {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-top: 4px;
+        }
+
+        .tpl-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .tpl-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 8px;
+            border-top: 1px dashed #E2E8F0;
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 360px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 11px 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .history-item:hover {
+            border-color: var(--blue-youth);
+            background: #FFFFFF;
+        }
+
+        .hist-info {
+            overflow: hidden;
+        }
+
+        .hist-title {
+            font-size: 0.83rem;
+            font-weight: 700;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .hist-meta {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 2px;
+        }
+
+        .hist-actions {
+            display: flex;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .icon-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
+            border: 1px solid #CBD5E1;
+            background: #FFFFFF;
+            color: var(--text-main);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover {
+            background: var(--blue-youth);
+            color: #FFFFFF;
+            border-color: var(--blue-youth);
+        }
+
+        .icon-btn.del:hover {
+            background: var(--red-primary);
+            border-color: var(--red-primary);
+        }
+
+        /* Toast Notification */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: #0F172A;
+            color: #FFFFFF;
+            padding: 12px 18px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.86rem;
+            font-weight: 600;
+            border-left: 4px solid var(--yellow-star);
+            animation: slideInRight 0.25s ease forwards;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Footer */
+        .app-footer {
+            background: #0F172A;
+            color: #94A3B8;
+            padding: 20px 24px;
+            font-size: 0.8rem;
+            margin-top: auto;
+            border-top: 3px solid var(--red-primary);
+        }
+
+        .footer-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .main-workspace,
+            .bottom-sections {
+                grid-template-columns: 1fr;
+            }
+            .sticky-right {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .form-row,
+            .conditions-grid,
+            .option-cards-grid,
+            .template-grid,
+            .output-actions-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-right {
+                align-items: flex-start;
+                width: 100%;
+            }
+            .motto-banner {
+                text-align: left;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand-group">
+                <div class="emblem-badge" title="Huy hiệu Đội TNTP Hồ Chí Minh">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="org-subtitle">
+                        <i class="fa-solid fa-star" style="color: var(--yellow-star);"></i>
+                        ĐỘI TNTP HỒ CHÍ MINH • HỘI ĐỒNG ĐỘI XÃ CAM LỘ
+                    </div>
+                    <h1>TRỢ LÝ SỐ CÔNG TÁC ĐỘI</h1>
+                    <div class="school-name">
+                        <i class="fa-solid fa-school" style="color: var(--yellow-star);"></i>
+                        <span>Liên đội Trường Tiểu học Lê Thế Hiếu – xã Cam Lộ, tỉnh Quảng Trị</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <div class="motto-banner">
+                    "Vì tổ quốc xã hội chủ nghĩa, vì lý tưởng của Bác Hồ vĩ đại: <strong>Sẵn sàng!</strong>"
+                </div>
+                <div class="live-meta-bar">
+                    <div class="meta-pill">
+                        <i class="fa-regular fa-clock"></i>
+                        <span id="liveClock">Đang tải thời gian...</span>
+                    </div>
+                    <div class="meta-pill blue-pill">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span id="currentMonthFocus">Chủ điểm tháng hiện tại</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= QUICK TOOLBAR ================= -->
+    <div class="quick-toolbar">
+        <div class="toolbar-inner">
+            <div class="toolbar-title">
+                <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--red-primary);"></i>
+                <span>Hệ thống thiết lập Prompt AI chuẩn Điều lệ, Nghi thức Đội & Hành chính sư phạm</span>
+            </div>
+            <div class="toolbar-actions">
+                <button type="button" class="btn btn-yellow" id="btnFillDemo1">
+                    <i class="fa-solid fa-bolt"></i> Ví dụ 1: Sinh hoạt dưới cờ "Tiến bước lên Đoàn"
+                </button>
+                <button type="button" class="btn btn-blue" id="btnFillDemo2">
+                    <i class="fa-solid fa-gamepad"></i> Ví dụ 2: Trò chơi dân gian giờ ra chơi
+                </button>
+                <button type="button" class="btn btn-outline" id="btnResetForm">
+                    <i class="fa-solid fa-rotate-left"></i> Làm mới
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MAIN 2-COLUMN WORKSPACE ================= -->
+    <main class="main-workspace">
+
+        <!-- LEFT COLUMN: BẢNG THIẾT LẬP THÔNG TIN -->
+        <section class="panel-card">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span class="step-badge"><i class="fa-solid fa-sliders"></i></span>
+                    <span>BẢNG THIẾT LẬP THÔNG TIN CÔNG TÁC ĐỘI</span>
+                </div>
+                <span class="badge-hint"><i class="fa-solid fa-bolt"></i> Tự động ghép Prompt thời gian thực</span>
+            </div>
+
+            <div class="panel-body">
+                <!-- 1. Chọn nhanh nhóm nghiệp vụ -->
+                <div class="section-label">
+                    <span>1. Chọn nhóm nghiệp vụ công tác Đội (5 nhóm trọng tâm)</span>
+                    <span id="activeCategoryLabel" style="color: var(--red-primary); font-weight: 800;">Văn bản hành chính</span>
+                </div>
+                <div class="category-grid" id="categoryTabs">
+                    <div class="cat-tab active" data-cat="van-ban">
+                        <i class="fa-solid fa-file-signature"></i>
+                        <span class="cat-name">1. Văn bản hành chính</span>
+                    </div>
+                    <div class="cat-tab" data-cat="kich-ban">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                        <span class="cat-name">2. Kịch bản hoạt động</span>
+                    </div>
+                    <div class="cat-tab" data-cat="tro-choi">
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                        <span class="cat-name">3. Trò chơi & Sân chơi</span>
+                    </div>
+                    <div class="cat-tab" data-cat="truyen-thong">
+                        <i class="fa-solid fa-bullhorn"></i>
+                        <span class="cat-name">4. Truyền thông & Học liệu số</span>
+                    </div>
+                    <div class="cat-tab" data-cat="nghiep-vu">
+                        <i class="fa-solid fa-award"></i>
+                        <span class="cat-name">5. Nghiệp vụ & Bồi dưỡng BCH</span>
+                    </div>
+                </div>
+
+                <!-- Sub-task selector -->
+                <div class="subtask-box">
+                    <div class="subtask-header">
+                        <i class="fa-solid fa-list-check"></i>
+                        <span>Chọn tác vụ cụ thể trong nhóm:</span>
+                    </div>
+                    <div class="subtask-list" id="subtaskList">
+                        <!-- Rendered dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- 2. Tên đơn vị & Thời gian / Chủ điểm -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="unitName">
+                            <span class="label-left"><i class="fa-solid fa-flag"></i> Tên đơn vị sử dụng</span>
+                            <span class="badge-hint">Cho phép sửa</span>
+                        </label>
+                        <input type="text" id="unitName" class="form-control" value="Liên đội Trường Tiểu học Lê Thế Hiếu, xã Cam Lộ, tỉnh Quảng Trị">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="themeSelect">
+                            <span class="label-left"><i class="fa-solid fa-calendar-days"></i> Thời gian & Chủ điểm năm học</span>
+                        </label>
+                        <select id="themeSelect" class="form-control">
+                            <option value="Tháng 9 - Chủ điểm: Truyền thống nhà trường – Vui bước đến trường">Tháng 9: Truyền thống nhà trường – Vui bước đến trường</option>
+                            <option value="Tháng 10 - Chủ điểm: Chăm ngoan học giỏi – Làm nghìn việc tốt">Tháng 10: Chăm ngoan học giỏi – Làm nghìn việc tốt</option>
+                            <option value="Tháng 11 - Chủ điểm: Tôn sư trọng đạo – Biết ơn thầy cô (20/11)" selected>Tháng 11: Tôn sư trọng đạo – Biết ơn thầy cô (20/11)</option>
+                            <option value="Tháng 12 - Chủ điểm: Uống nước nhớ nguồn – Tiếp bước cha anh (22/12)">Tháng 12: Uống nước nhớ nguồn – Tiếp bước cha anh (22/12)</option>
+                            <option value="Tháng 1 & 2 - Chủ điểm: Mừng Đảng quang vinh – Mừng Xuân đổi mới">Tháng 1 & 2: Mừng Đảng quang vinh – Mừng Xuân đổi mới</option>
+                            <option value="Tháng 3 - Chủ điểm: Tiến bước lên Đoàn (26/3)">Tháng 3: Tiến bước lên Đoàn (Kỷ niệm 26/3)</option>
+                            <option value="Tháng 4 - Chủ điểm: Hòa bình và Hữu nghị – Non sông thống nhất (30/4)">Tháng 4: Hòa bình và Hữu nghị – Non sông thống nhất (30/4)</option>
+                            <option value="Tháng 5 - Chủ điểm: Bác Hồ kính yêu – Tự hào Đội ta lớn lên cùng đất nước (15/5 & 19/5)">Tháng 5: Bác Hồ kính yêu – Kỷ niệm ngày thành lập Đội 15/5</option>
+                            <option value="Tháng 6, 7, 8 - Chủ điểm: Hè vui an toàn – Rèn luyện kỹ năng, phòng chống đuối nước">Hè (Tháng 6-8): Hè vui an toàn – Rèn luyện kỹ năng</option>
+                            <option value="Chủ điểm toàn năm học: Thiếu nhi Quảng Trị làm theo 5 điều Bác Hồ dạy">Toàn năm học: Thiếu nhi làm theo 5 điều Bác Hồ dạy</option>
+                            <option value="custom">-- Tự nhập chủ điểm / đợt thi đua riêng --</option>
+                        </select>
+                        <input type="text" id="customThemeInput" class="form-control" placeholder="Nhập tên chủ điểm hoặc ngày lễ kỷ niệm cụ thể..." style="display: none; margin-top: 8px;">
+                    </div>
+                </div>
+
+                <!-- 3. Đối tượng tham gia (Chọn nhanh nhiều mục) -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-left"><i class="fa-solid fa-users"></i> Đối tượng tham gia (Có thể chọn nhiều mục)</span>
+                        <span class="badge-hint">Bấm để chọn/bỏ chọn</span>
+                    </label>
+                    <div class="multi-chip-group" id="targetGroup">
+                        <div class="check-chip selected" data-val="Học sinh toàn trường (Khối 1–5)">
+                            <i class="fa-solid fa-square-check"></i> Học sinh khối 1–5
+                        </div>
+                        <div class="check-chip" data-val="Nhi đồng khối lớp 1–3">
+                            <i class="fa-regular fa-square"></i> Nhi đồng lớp 1–3
+                        </div>
+                        <div class="check-chip selected" data-val="Đội viên khối lớp 3–5">
+                            <i class="fa-solid fa-square-check"></i> Đội viên lớp 3–5
+                        </div>
+                        <div class="check-chip selected" data-val="Ban Chỉ huy Liên đội / Chi đội & Phụ trách Sao">
+                            <i class="fa-solid fa-square-check"></i> Ban Chỉ huy Liên đội
+                        </div>
+                        <div class="check-chip" data-val="Giáo viên chủ nhiệm (Phụ trách Chi đội / Sao Nhi đồng)">
+                            <i class="fa-regular fa-square"></i> Giáo viên chủ nhiệm
+                        </div>
+                        <div class="check-chip" data-val="Ban Giám hiệu & Chi đoàn Giáo viên">
+                            <i class="fa-regular fa-square"></i> BGH & Chi đoàn Giáo viên
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Điều kiện thực tế nhà trường -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-left"><i class="fa-solid fa-compass-drafting"></i> Điều kiện thực tế tại Liên đội</span>
+                        <span class="badge-hint">Sát thực tế Tiểu học</span>
+                    </label>
+                    <div class="conditions-grid">
+                        <div class="cond-item">
+                            <label for="condLocation"><i class="fa-solid fa-location-dot"></i> Địa điểm tổ chức</label>
+                            <select id="condLocation">
+                                <option value="Sân trường ngoài trời (có mái che/cây xanh)">Sân trường ngoài trời</option>
+                                <option value="Nhà đa năng / Hội trường nhà trường">Nhà đa năng / Hội trường</option>
+                                <option value="Tại các phòng học Chi đội / Lớp Nhi đồng">Tại các lớp học</option>
+                                <option value="Di tích lịch sử / Địa chỉ đỏ tại xã Cam Lộ">Địa chỉ đỏ tại Cam Lộ</option>
+                                <option value="Không gian trực tuyến (Fanpage Liên đội / Zalo)">Không gian trực tuyến</option>
+                            </select>
+                        </div>
+                        <div class="cond-item">
+                            <label for="condDuration"><i class="fa-regular fa-hourglass-half"></i> Thời lượng dự kiến</label>
+                            <input type="text" id="condDuration" value="35 - 40 phút (1 tiết)">
+                        </div>
+                        <div class="cond-item">
+                            <label for="condScale"><i class="fa-solid fa-people-group"></i> Quy mô số lượng</label>
+                            <input type="text" id="condScale" value="[Cần điền: tổng số học sinh/lớp]">
+                        </div>
+                        <div class="cond-item">
+                            <label for="condBudget"><i class="fa-solid fa-coins"></i> Kinh phí dự kiến</label>
+                            <input type="text" id="condBudget" value="Tiết kiệm, trích quỹ Đội / xã hội hóa">
+                        </div>
+                        <div class="cond-item">
+                            <label for="condStaff"><i class="fa-solid fa-user-check"></i> Nhân sự phối hợp</label>
+                            <input type="text" id="condStaff" value="GV Tổng phụ trách, BCH Liên đội, GVCN">
+                        </div>
+                        <div class="cond-item">
+                            <label for="condProps"><i class="fa-solid fa-microphone"></i> Thiết bị / Đạo cụ hiện có</label>
+                            <input type="text" id="condProps" value="Loa di động, micro, trống Đội, cờ Đội, khăn quàng">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Mô tả yêu cầu chi tiết + Gợi ý nhanh -->
+                <div class="form-group">
+                    <label class="form-label" for="detailRequest">
+                        <span class="label-left"><i class="fa-solid fa-pen-to-square"></i> Mô tả yêu cầu chi tiết & Nội dung trọng tâm</span>
+                        <span class="badge-hint">Bấm nút gợi ý bên dưới để chèn nhanh</span>
+                    </label>
+                    <textarea id="detailRequest" class="form-control" placeholder="Nhập bối cảnh, mục tiêu cụ thể hoặc các lưu ý đặc thù của Liên đội Trường Tiểu học Lê Thế Hiếu...">Xây dựng nội dung thiết thực, phù hợp đặc thù học sinh tiểu học tại xã Cam Lộ, tỉnh Quảng Trị; lồng ghép giáo dục truyền thống anh hùng Lê Thế Hiếu và phong trào "Thiếu nhi Việt Nam thi đua làm theo 5 điều Bác Hồ dạy".</textarea>
+                    <div class="quick-tags-bar" id="quickTagsBar">
+                        <span class="quick-tag" data-insert="Lồng ghép tìm hiểu thân thế, sự nghiệp anh hùng liệt sĩ Lê Thế Hiếu và truyền thống quê hương Cam Lộ, Quảng Trị."><i class="fa-solid fa-plus"></i> + Truyền thống Lê Thế Hiếu</span>
+                        <span class="quick-tag" data-insert="Đảm bảo đúng quy trình Nghi thức Đội TNTP Hồ Chí Minh (chào cờ, hát Quốc ca, Đội ca, hô đáp khẩu hiệu Đội)."><i class="fa-solid fa-plus"></i> + Chuẩn Nghi thức Đội</span>
+                        <span class="quick-tag" data-insert="Có câu hỏi tương tác đố vui có thưởng ngắn gọn, dễ hiểu để thu hút cả học sinh lớp 1, 2 và lớp 3, 4, 5."><i class="fa-solid fa-plus"></i> + Đố vui tương tác HS</span>
+                        <span class="quick-tag" data-insert="Phân công rõ trách nhiệm của Giáo viên Tổng phụ trách, GVCN phụ trách Chi đội/Sao và đội Cờ đỏ."><i class="fa-solid fa-plus"></i> + Phân công rõ người rõ việc</span>
+                        <span class="quick-tag" data-insert="Đính kèm phương án dự phòng khi thời tiết mưa hoặc mất điện và phương án đảm bảo an toàn tuyệt đối cho học sinh."><i class="fa-solid fa-plus"></i> + Phương án an toàn/mưa</span>
+                    </div>
+                </div>
+
+                <!-- 6. Tùy chọn văn phong -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-left"><i class="fa-solid fa-feather-pointed"></i> Tùy chọn văn phong trình bày</span>
+                    </label>
+                    <div class="option-cards-grid" id="toneOptions">
+                        <div class="opt-card" data-tone="Chuẩn mực hành chính sư phạm: Ngôn ngữ trang trọng, chặt chẽ, đúng thuật ngữ Điều lệ Đội và văn bản quản lý giáo dục tiểu học.">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <div>
+                                <div class="opt-title">Hành chính sư phạm</div>
+                                <div class="opt-desc">Trang trọng, chuẩn Điều lệ Đội</div>
+                            </div>
+                        </div>
+                        <div class="opt-card" data-tone="Vui tươi, gần gũi học sinh Tiểu học: Ngôn từ trong sáng, giàu hình ảnh, câu văn ngắn gọn, khích lệ tinh thần thiếu nhi, dễ đọc dễ nhớ.">
+                            <i class="fa-solid fa-face-smile-beam"></i>
+                            <div>
+                                <div class="opt-title">Vui tươi, gần gũi HS</div>
+                                <div class="opt-desc">Sinh động, hợp tâm lý Tiểu học</div>
+                            </div>
+                        </div>
+                        <div class="opt-card active" data-tone="Kết hợp hài hòa cả hai: Phần khung kế hoạch/phân công chuẩn mực hành chính sư phạm; phần lời dẫn, trò chơi và tương tác học sinh vui tươi, truyền cảm hứng.">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <div>
+                                <div class="opt-title">Kết hợp cả hai (Khuyên dùng)</div>
+                                <div class="opt-desc">Khung chuẩn mực + Lời dẫn sinh động</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Tùy chọn định dạng đầu ra -->
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label">
+                        <span class="label-left"><i class="fa-solid fa-table-columns"></i> Tùy chọn định dạng sản phẩm đầu ra</span>
+                    </label>
+                    <div class="option-cards-grid cols-2" id="formatOptions">
+                        <div class="opt-card active" data-format="Văn bản chuẩn thể thức Nghị định 30/2020/NĐ-CP và hướng dẫn của Hội đồng Đội (có Quốc hiệu, Tiêu ngữ, tên Liên đội, mục đích - yêu cầu, nội dung, tổ chức thực hiện, nơi nhận).">
+                            <i class="fa-solid fa-file-word"></i>
+                            <div>
+                                <div class="opt-title">Văn bản chuẩn thể thức NĐ 30</div>
+                                <div class="opt-desc">Đầy đủ Quốc hiệu, bố cục hành chính Đội</div>
+                            </div>
+                        </div>
+                        <div class="opt-card" data-format="Kịch bản chi tiết từng phút kèm lời dẫn MC song hành, hiệu lệnh Nghi thức Đội, âm nhạc nền và hướng dẫn điều hành sân khấu.">
+                            <i class="fa-solid fa-scroll"></i>
+                            <div>
+                                <div class="opt-title">Kịch bản chi tiết kèm lời dẫn MC</div>
+                                <div class="opt-desc">Có timeline, lời MC, nhạc hiệu & nghi thức</div>
+                            </div>
+                        </div>
+                        <div class="opt-card" data-format="Bảng biểu phân công nhiệm vụ trực quan (TT, Thời lượng, Nội dung công việc, Người phụ trách, Phối hợp, Chuẩn bị đạo cụ, Sản phẩm/Ghi chú).">
+                            <i class="fa-solid fa-table"></i>
+                            <div>
+                                <div class="opt-title">Bảng biểu phân công chi tiết</div>
+                                <div class="opt-desc">Trình bày dạng bảng Markdown dễ copy sang Word</div>
+                            </div>
+                        </div>
+                        <div class="opt-card" data-format="Gói truyền thông & Prompt đa phương tiện: Bài đăng Fanpage Liên đội có bố cục hấp dẫn + Kịch bản phân cảnh video ngắn + Câu lệnh (Prompt tiếng Anh & tiếng Việt) tạo ảnh Poster/Backdrop sân khấu.">
+                            <i class="fa-solid fa-photo-film"></i>
+                            <div>
+                                <div class="opt-title">Prompt tạo Ảnh / Video & Truyền thông</div>
+                                <div class="opt-desc">Bài đăng Fanpage + Prompt Poster/Backdrop</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: KẾT QUẢ PROMPT & XEM TRƯỚC CẤU TRÚC -->
+        <aside class="sticky-right">
+            <section class="panel-card">
+                <div class="panel-header blue-header">
+                    <div class="panel-title">
+                        <span class="step-badge"><i class="fa-solid fa-terminal"></i></span>
+                        <span>KẾT QUẢ CÂU LỆNH (PROMPT) & XEM TRƯỚC</span>
+                    </div>
+                    <div class="output-tabs">
+                        <button type="button" class="out-tab-btn active" id="tabBtnPrompt">
+                            <i class="fa-solid fa-code"></i> Câu lệnh AI
+                        </button>
+                        <button type="button" class="out-tab-btn" id="tabBtnPreview">
+                            <i class="fa-solid fa-sitemap"></i> Xem cấu trúc
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <!-- Khung hiển thị Prompt -->
+                    <div class="prompt-box-wrapper" id="promptBoxWrapper">
+                        <div class="prompt-box-topbar">
+                            <div class="window-dots">
+                                <span class="dot r"></span>
+                                <span class="dot y"></span>
+                                <span class="dot g"></span>
+                                <span style="color: #E2E8F0; font-size: 0.76rem; font-weight: 700; margin-left: 6px;">PROMPT_CHUAN_CONG_TAC_DOI.txt</span>
+                            </div>
+                            <div class="prompt-stats">
+                                <span id="charCount">0 ký tự</span>
+                                <span>•</span>
+                                <span style="color: #4ADE80;"><i class="fa-solid fa-circle-check"></i> Sẵn sàng dùng</span>
+                            </div>
+                        </div>
+                        <div class="prompt-content-area" id="promptOutput" contenteditable="true" spellcheck="false"></div>
+                    </div>
+
+                    <!-- Khung Xem trước cấu trúc sản phẩm -->
+                    <div class="structure-preview-area" id="structurePreviewArea">
+                        <!-- Rendered dynamically via JS -->
+                    </div>
+
+                    <!-- Nút Sao chép 1 chạm & Lưu lịch sử -->
+                    <div class="output-actions-grid">
+                        <button type="button" class="btn-copy-hero" id="btnCopyPrompt">
+                            <i class="fa-regular fa-copy"></i>
+                            <span id="copyBtnText">SAO CHÉP CÂU LỆNH (1 CHẠM)</span>
+                        </button>
+                        <button type="button" class="btn btn-blue" id="btnSaveHistory" style="font-size: 0.88rem; font-weight: 700;">
+                            <i class="fa-solid fa-bookmark"></i> Lưu vào lịch sử
+                        </button>
+                    </div>
+
+                    <!-- Xuất file .txt / .doc -->
+                    <div class="export-sub-actions">
+                        <button type="button" class="btn btn-outline" id="btnDownloadTxt">
+                            <i class="fa-solid fa-file-lines" style="color: var(--blue-youth);"></i> Tải xuống tệp .TXT
+                        </button>
+                        <button type="button" class="btn btn-outline" id="btnDownloadDoc">
+                            <i class="fa-solid fa-file-word" style="color: #1D4ED8;"></i> Tải xuống tệp Word (.DOC)
+                        </button>
+                    </div>
+
+                    <!-- Mở nhanh các công cụ AI -->
+                    <div class="ai-launcher-bar">
+                        <span class="ai-launcher-label"><i class="fa-solid fa-rocket"></i> Dán câu lệnh đã chép vào:</span>
+                        <div class="ai-links">
+                            <a href="https://gemini.google.com/" target="_blank" rel="noopener" class="ai-chip-link">
+                                <i class="fa-solid fa-sparkles" style="color: #2563EB;"></i> Google Gemini
+                            </a>
+                            <a href="https://chatgpt.com/" target="_blank" rel="noopener" class="ai-chip-link">
+                                <i class="fa-solid fa-robot" style="color: #10B981;"></i> ChatGPT
+                            </a>
+                            <a href="https://aistudio.google.com/" target="_blank" rel="noopener" class="ai-chip-link">
+                                <i class="fa-solid fa-microchip" style="color: #D97706;"></i> AI Studio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+    </main>
+
+    <!-- ================= KHO MẪU CÔNG TÁC ĐỘI & LỊCH SỬ LƯU TRỮ ================= -->
+    <section class="bottom-sections">
+        <!-- Kho mẫu công tác Đội sẵn có -->
+        <div class="panel-card">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span class="step-badge"><i class="fa-solid fa-box-archive"></i></span>
+                    <span>KHO MẪU TÌNH HUỐNG CÔNG TÁC ĐỘI SẴN CÓ (NẠP NHANH 1 CHẠM)</span>
+                </div>
+                <span class="badge-hint">Chuẩn thực tế Liên đội TH Lê Thế Hiếu</span>
+            </div>
+            <div class="panel-body">
+                <div class="template-grid" id="presetTemplatesGrid">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Lịch sử câu lệnh đã lưu (LocalStorage) -->
+        <div class="panel-card">
+            <div class="panel-header blue-header">
+                <div class="panel-title">
+                    <span class="step-badge"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                    <span>LỊCH SỬ CÂU LỆNH ĐÃ LƯU</span>
+                </div>
+                <button type="button" class="btn btn-outline" id="btnClearHistory" style="padding: 4px 10px; font-size: 0.74rem;">
+                    <i class="fa-solid fa-trash-can"></i> Xóa tất cả
+                </button>
+            </div>
+            <div class="panel-body">
+                <div class="history-list" id="historyList">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <div>
+                <strong style="color: #FFFFFF;">TRỢ LÝ SỐ CÔNG TÁC ĐỘI – LIÊN ĐỘI TRƯỜNG TIỂU HỌC LÊ THẾ HIẾU</strong>
+                <div>Địa chỉ: Xã Cam Lộ, tỉnh Quảng Trị • Thiết kế chuyên biệt cho Giáo viên Tổng phụ trách Đội & GV phụ trách Chi đội/Sao Nhi đồng</div>
+            </div>
+            <div style="text-align: right;">
+                <span style="color: var(--yellow-star); font-weight: 700;"><i class="fa-solid fa-shield-heart"></i> Chuẩn Điều lệ & Nghi thức Đội TNTP Hồ Chí Minh</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // 1. DỮ LIỆU 5 NHÓM NGHIỆP VỤ & TÁC VỤ CON
+        const CATEGORIES_DATA = {
+            "van-ban": {
+                name: "Văn bản hành chính Đội",
+                roleExpert: "Chuyên gia cao cấp về công tác Đội TNTP Hồ Chí Minh bậc Tiểu học và nghiệp vụ văn thư hành chính trường học (am hiểu Nghị định 30/2020/NĐ-CP, Điều lệ Đội và Chương trình Công tác Đội và phong trào thiếu nhi)",
+                subtasks: [
+                    "Kế hoạch công tác Đội và phong trào thiếu nhi năm học",
+                    "Kế hoạch hoạt động Đội theo tháng / chủ điểm",
+                    "Kế hoạch hoạt động tuần & lịch trực Cờ đỏ",
+                    "Báo cáo sơ kết học kỳ I / Tổng kết năm học công tác Đội",
+                    "Tờ trình xin phê duyệt kinh phí / tổ chức hội thi cấp Liên đội",
+                    "Quyết định thành lập Ban Chỉ huy Liên đội / Đội Sao đỏ",
+                    "Thể lệ & Kế hoạch tổ chức Hội thi cấp Liên đội"
+                ],
+                outline: [
+                    "Phần mở đầu: Tiêu đề Hội đồng Đội xã Cam Lộ - Liên đội Trường TH Lê Thế Hiếu, Quốc hiệu - Tiêu ngữ, Số/Ký hiệu văn bản.",
+                    "I. Mục đích - Yêu cầu (bám sát chỉ đạo năm học và thực tế học sinh tiểu học).",
+                    "II. Thời gian, Địa điểm, Đối tượng tham gia.",
+                    "III. Nội dung và Biện pháp thực hiện trọng tâm (chia theo từng mảng/đợt thi đua).",
+                    "IV. Kinh phí và Điều kiện cơ sở vật chất (kèm ký hiệu [Cần điền: ...] cho số liệu thực tế).",
+                    "V. Tổ chức thực hiện & Phân công trách nhiệm (TPT Đội, GVCN, BCH Liên đội) + Nơi nhận & Chữ ký."
+                ]
+            },
+            "kich-ban": {
+                name: "Kịch bản hoạt động & Nghi thức",
+                roleExpert: "Đạo diễn sự kiện giáo dục Tiểu học kiêm Huấn luyện viên cấp I Trung ương về Nghi thức Đội TNTP Hồ Chí Minh",
+                subtasks: [
+                    "Kịch bản Chào cờ đầu tuần & Nhận xét thi đua Cờ đỏ",
+                    "Kịch bản Sinh hoạt dưới cờ theo chủ điểm tháng",
+                    "Kịch bản Lễ Kết nạp Đội viên mới (Khối 3 - 5)",
+                    "Kịch bản Sinh hoạt Sao Nhi đồng theo chủ điểm (Khối 1 - 3)",
+                    "Kịch bản Đại hội Liên đội / Đại hội Chi đội đầu năm",
+                    "Kịch bản Ngày hội Thiếu nhi vui khỏe - Tiến bước lên Đoàn",
+                    "Kịch bản Hành trình về địa chỉ đỏ / Tưởng niệm Anh hùng Lê Thế Hiếu"
+                ],
+                outline: [
+                    "1. Công tác chuẩn bị (Sân khấu, âm thanh, đội Nghi lễ, trang phục khăn quàng đỏ).",
+                    "2. Phần Nghi lễ (Ổn định tổ chức, Chào cờ theo Nghi thức Đội, Quốc ca, Đội ca, Hô - đáp khẩu hiệu Đội).",
+                    "3. Phần Nội dung trọng tâm (Lời dẫn MC chi tiết từng phút, tiết mục văn nghệ, sinh hoạt chủ điểm, tương tác học sinh).",
+                    "4. Phần Tổng kết - Dặn dò của GV Tổng phụ trách Đội / Ban Giám hiệu.",
+                    "5. Bảng kiểm đạo cụ & Phương án dự phòng thời tiết."
+                ]
+            },
+            "tro-choi": {
+                name: "Trò chơi & Sân chơi sáng tạo",
+                roleExpert: "Chuyên gia tâm lý giáo dục Tiểu học và Huấn luyện viên kỹ năng hoạt náo, trò chơi tập thể thiếu nhi",
+                subtasks: [
+                    "Tổ chức Trò chơi dân gian giờ ra chơi trải nghiệm sáng tạo",
+                    "Trò chơi tập thể hoạt náo sân trường (không cần đạo cụ phức tạp)",
+                    "Kịch bản Tiểu phẩm ngắn giáo dục đạo đức / Phòng chống bạo lực học đường",
+                    "Bộ câu hỏi Rung chuông vàng / Đố vui tìm hiểu lịch sử Đội & Anh hùng Lê Thế Hiếu",
+                    "Sân chơi Giờ ra chơi trải nghiệm khoa học - sáng tạo - đọc sách",
+                    "Trò chơi sinh hoạt vòng tròn cho Sao Nhi đồng lớp 1, 2, 3"
+                ],
+                outline: [
+                    "1. Tên trò chơi / tiểu phẩm & Mục tiêu giáo dục phẩm chất, năng lực học sinh tiểu học.",
+                    "2. Chuẩn bị sân bãi, đội hình, đạo cụ đơn giản dễ kiếm và thời lượng.",
+                    "3. Luật chơi & Cách chơi chi tiết từng bước (kèm lời hô hoạt náo vui nhộn của quản trò).",
+                    "4. Các tình huống xử lý sư phạm & Quy tắc đảm bảo an toàn tuyệt đối cho học sinh.",
+                    "5. Thông điệp giáo dục rút ra sau hoạt động."
+                ]
+            },
+            "truyen-thong": {
+                name: "Truyền thông & Học liệu số",
+                roleExpert: "Chuyên gia truyền thông giáo dục số và Thiết kế học liệu trực quan cho Đội TNTP Hồ Chí Minh",
+                subtasks: [
+                    "Bài đăng Fanpage Liên đội tuyên truyền hoạt động / gương người tốt việc tốt",
+                    "Kịch bản Video ngắn (Reels/TikTok/CapCut) tổng kết hoạt động Liên đội",
+                    "Câu lệnh (Prompt) vẽ Poster / Backdrop sân khấu ngày lễ lớn của Đội",
+                    "Infographic tuyên truyền Măng non (An toàn giao thông, Phòng chống đuối nước, 5 điều Bác Hồ dạy)",
+                    "Bản tin Phát thanh Măng non hàng tuần của Liên đội"
+                ],
+                outline: [
+                    "1. Tiêu đề thu hút (Headline) chuẩn phong cách Măng non học đường.",
+                    "2. Nội dung bài viết / Kịch bản phân cảnh (Cảnh hình ảnh - Lời bình - Nhạc nền - Hiệu ứng chữ).",
+                    "3. Bộ câu lệnh (Prompt chi tiết tiếng Việt & tiếng Anh) để tạo hình ảnh minh họa / Backdrop tỷ lệ chuẩn.",
+                    "4. Bộ Hashtag truyền thông Liên đội Trường Tiểu học Lê Thế Hiếu."
+                ]
+            },
+            "nghiep-vu": {
+                name: "Nghiệp vụ Đội & Bồi dưỡng BCH",
+                roleExpert: "Giảng viên Huấn luyện nghiệp vụ Công tác Đội và Bồi dưỡng kỹ năng Ban Chỉ huy Liên đội bậc Tiểu học",
+                subtasks: [
+                    "Giáo án tập huấn Nghi thức Đội (7 yêu cầu đối với Đội viên, đội hình đội ngũ)",
+                    "Tài liệu bồi dưỡng kỹ năng chỉ huy, đánh trống Đội cho Ban Chỉ huy Liên đội",
+                    "Hướng dẫn Phụ trách Sao Nhi đồng tự quản điều hành buổi sinh hoạt Sao",
+                    "Sổ tay hướng dẫn ghi chép Sổ Liên đội, Sổ Chi đội và đánh giá Chương trình Rèn luyện Đội viên",
+                    "Bộ câu hỏi kiểm tra công nhận Chuyên hiệu Rèn luyện Đội viên (Hạng Dự bị / Hạng Một)"
+                ],
+                outline: [
+                    "1. Mục tiêu cần đạt về kiến thức Điều lệ Đội và kỹ năng thực hành Nghi thức Đội.",
+                    "2. Nội dung huấn luyện cốt lõi (khẩu lệnh, động tác mẫu, những lỗi thường gặp của HS tiểu học và cách sửa).",
+                    "3. Bài tập thực hành theo nhóm / Tình huống thực tế cho Ban Chỉ huy Liên đội.",
+                    "4. Bảng tiêu chí đánh giá, kiểm tra đạt yêu cầu."
+                ]
+            }
+        };
+
+        // 2. KHO MẪU CÔNG TÁC ĐỘI SẴN CÓ (6 MẪU THỰC TẾ)
+        const PRESET_TEMPLATES = [
+            {
+                id: "tpl-1",
+                badge: "Kịch bản hoạt động",
+                title: "Sinh hoạt dưới cờ: 'Tiến bước lên Đoàn' (26/3)",
+                desc: "Kịch bản chào cờ, ôn truyền thống Đoàn - Đội, giao lưu đố vui và đồng diễn sân trường cho HS khối 1-5.",
+                cat: "kich-ban",
+                subtask: "Kịch bản Sinh hoạt dưới cờ theo chủ điểm tháng",
+                theme: "Tháng 3 - Chủ điểm: Tiến bước lên Đoàn (26/3)",
+                targets: ["Học sinh toàn trường (Khối 1–5)", "Đội viên khối lớp 3–5", "Ban Chỉ huy Liên đội / Chi đội & Phụ trách Sao"],
+                location: "Sân trường ngoài trời (có mái che/cây xanh)",
+                duration: "35 phút (Tiết Chào cờ sáng thứ Hai)",
+                scale: "[Cần điền: tổng số học sinh toàn trường và số lớp]",
+                budget: "Tiết kiệm (Quà đố vui từ quỹ Đội)",
+                staff: "GV Tổng phụ trách, BCH Liên đội, Đội Nghi lễ, GVCN",
+                props: "Hệ thống âm thanh, trống Đội, cờ Tổ quốc, cờ Đội, 10 phần quà nhỏ",
+                detail: "Xây dựng kịch bản Sinh hoạt dưới cờ chủ điểm 'Tiến bước lên Đoàn' chào mừng ngày thành lập Đoàn TNCS Hồ Chí Minh 26/3 tại Liên đội Trường Tiểu học Lê Thế Hiếu. Yêu cầu có: (1) Nghi lễ chào cờ chuẩn Nghi thức Đội; (2) Phút sinh hoạt truyền thống kể chuyện tấm gương anh hùng trẻ tuổi và anh hùng Lê Thế Hiếu; (3) Phần giao lưu đố vui 5 câu hỏi nhanh có thưởng dành cho cả Nhi đồng khối 1-2 và Đội viên khối 3-5; (4) Màn đồng diễn dân vũ/hát múa tập thể khép lại chương trình.",
+                toneIndex: 2,
+                formatIndex: 1
+            },
+            {
+                id: "tpl-2",
+                badge: "Trò chơi & Sân chơi",
+                title: "Tổ chức Trò chơi dân gian giờ ra chơi không thiết bị số",
+                desc: "Phân khu sân trường cho khối 1-2 và khối 3-5 chơi Ô ăn quan, Rồng rắn lên mây, Kéo co, Nhảy dây an toàn.",
+                cat: "tro-choi",
+                subtask: "Tổ chức Trò chơi dân gian giờ ra chơi trải nghiệm sáng tạo",
+                theme: "Chủ điểm toàn năm học: Thiếu nhi Quảng Trị làm theo 5 điều Bác Hồ dạy",
+                targets: ["Học sinh toàn trường (Khối 1–5)", "Nhi đồng khối lớp 1–3", "Đội viên khối lớp 3–5", "Ban Chỉ huy Liên đội / Chi đội & Phụ trách Sao"],
+                location: "Sân trường ngoài trời (có mái che/cây xanh)",
+                duration: "20 - 25 phút giờ ra chơi hàng ngày",
+                scale: "[Cần điền: số lớp và diện tích sân trường]",
+                budget: "Kinh phí tối thiểu (Phấn vẽ sân, dây thừng, sỏi/hạt nhựa, tre)",
+                staff: "GV Tổng phụ trách, GVCN trực tuần, Đội Sao đỏ và BCH Liên đội",
+                props: "Phấn màu vẽ ô, dây nhảy, cờ hiệu phân khu, loa cầm tay",
+                detail: "Thiết kế mô hình 'Giờ ra chơi trải nghiệm - Sáng tạo với Trò chơi dân gian' tại sân trường Tiểu học Lê Thế Hiếu. Yêu cầu phân chia khu vực sân trường khoa học theo lứa tuổi (Khối 1-2 chơi trò nhẹ nhàng như Rồng rắn lên mây, Ô ăn quan, Dung dăng dung dẻ; Khối 3-5 chơi Nhảy dây tập thể, Kéo co, Cướp cờ). Hướng dẫn rõ luật chơi, lời đồng dao, cách phân công Đội Cờ đỏ/BCH Liên đội tự quản và quy tắc đảm bảo an toàn chống va chạm.",
+                toneIndex: 1,
+                formatIndex: 2
+            },
+            {
+                id: "tpl-3",
+                badge: "Văn bản hành chính",
+                title: "Kế hoạch hoạt động Đội tháng 11 – Tri ân thầy cô (20/11)",
+                desc: "Kế hoạch tổ chức hội diễn văn nghệ, làm báo tường/thiệp chúc mừng và phong trào Hoa điểm tốt.",
+                cat: "van-ban",
+                subtask: "Kế hoạch hoạt động Đội theo tháng / chủ điểm",
+                theme: "Tháng 11 - Chủ điểm: Tôn sư trọng đạo – Biết ơn thầy cô (20/11)",
+                targets: ["Học sinh toàn trường (Khối 1–5)", "Đội viên khối lớp 3–5", "Giáo viên chủ nhiệm (Phụ trách Chi đội / Sao Nhi đồng)"],
+                location: "Sân trường ngoài trời (có mái che/cây xanh)",
+                duration: "Trong suốt tháng 11 (Cao điểm từ 01/11 đến 20/11)",
+                scale: "[Cần điền: số Chi đội và số lớp Nhi đồng]",
+                budget: "[Cần điền: dự trù kinh phí khen thưởng các giải Nhất, Nhì, Ba]",
+                staff: "Ban Giám hiệu, GV Tổng phụ trách Đội, GVCN, BCH Liên đội",
+                props: "Bảng tin Liên đội, giấy A0/thiệp thủ công, hệ thống âm thanh sân khấu",
+                detail: "Xây dựng Kế hoạch hoạt động công tác Đội tháng 11 chủ điểm 'Tôn sư trọng đạo - Biết ơn thầy cô' chào mừng Ngày Nhà giáo Việt Nam 20/11 của Liên đội Trường Tiểu học Lê Thế Hiếu. Gồm 3 hoạt động trọng tâm: (1) Đợt thi đua 'Giờ học tốt - Hoa điểm tốt' dâng tặng thầy cô; (2) Hội thi thiết kế Thiệp tri ân / Tập san Măng non theo khối lớp; (3) Chương trình văn nghệ & Phát thanh Măng non tri ân thầy cô.",
+                toneIndex: 0,
+                formatIndex: 0
+            },
+            {
+                id: "tpl-4",
+                badge: "Kịch bản hoạt động",
+                title: "Lễ Kết nạp Đội viên mới cho học sinh khối 3 tiêu biểu",
+                desc: "Kịch bản trang nghiêm đúng quy trình Nghi thức Đội: đọc quyết định, trao khăn quàng đỏ, đọc lời hứa Đội viên.",
+                cat: "kich-ban",
+                subtask: "Kịch bản Lễ Kết nạp Đội viên mới (Khối 3 - 5)",
+                theme: "Tháng 5 - Chủ điểm: Bác Hồ kính yêu – Tự hào Đội ta lớn lên cùng đất nước (15/5 & 19/5)",
+                targets: ["Nhi đồng khối lớp 1–3", "Đội viên khối lớp 3–5", "Ban Chỉ huy Liên đội / Chi đội & Phụ trách Sao", "Ban Giám hiệu & Chi đoàn Giáo viên"],
+                location: "Di tích lịch sử / Địa chỉ đỏ tại xã Cam Lộ",
+                duration: "45 phút",
+                scale: "[Cần điền: số lượng Nhi đồng khối 3 được kết nạp đợt này]",
+                budget: "Trang bị khăn quàng đỏ mới, sổ Đội viên",
+                staff: "Ban Giám hiệu, Bí thư Chi đoàn, GV Tổng phụ trách, BCH Liên đội",
+                props: "Cờ Tổ quốc, cờ Đội, trống Đội, khay đựng khăn quàng đỏ, văn bản Quyết định kết nạp",
+                detail: "Xây dựng kịch bản chi tiết Lễ Kết nạp Đội viên mới đợt 15/5 (hoặc 19/5) cho học sinh khối 3 ưu tú của Liên đội Trường Tiểu học Lê Thế Hiếu. Đảm bảo tuyệt đối đúng trình tự Điều lệ và Nghi thức Đội TNTP Hồ Chí Minh: Chào cờ, tuyên bố lý do, báo cáo quá trình phấn đấu, đọc Quyết định kết nạp, nghi thức trao và thắt khăn quàng đỏ trên nền nhạc 'Mơ ước ngày mai', Đội viên mới đọc Lời hứa Đội viên và phát biểu giao nhiệm vụ của thầy/cô Tổng phụ trách.",
+                toneIndex: 2,
+                formatIndex: 1
+            },
+            {
+                id: "tpl-5",
+                badge: "Nghiệp vụ & Bồi dưỡng BCH",
+                title: "Tập huấn Ban Chỉ huy Liên đội & Phụ trách Sao tự quản",
+                desc: "Giáo án huấn luyện 7 yêu cầu Đội viên, khẩu lệnh tập hợp đội hình và kỹ năng điều hành Sao Nhi đồng.",
+                cat: "nghiep-vu",
+                subtask: "Giáo án tập huấn Nghi thức Đội (7 yêu cầu đối với Đội viên, đội hình đội ngũ)",
+                theme: "Tháng 10 - Chủ điểm: Chăm ngoan học giỏi – Làm nghìn việc tốt",
+                targets: ["Đội viên khối lớp 3–5", "Ban Chỉ huy Liên đội / Chi đội & Phụ trách Sao"],
+                location: "Nhà đa năng / Hội trường nhà trường",
+                duration: "90 phút (1 buổi tập huấn)",
+                scale: "[Cần điền: số lượng ủy viên BCH Liên đội, Chi đội và Phụ trách Sao]",
+                budget: "Tài liệu in ấn, nước uống cho học sinh",
+                staff: "Giáo viên Tổng phụ trách Đội trực tiếp huấn luyện",
+                props: "Trống Đội, cờ Đội, khăn quàng đỏ, còi chỉ huy, phiếu bài tập tình huống",
+                detail: "Thiết kế giáo án buổi tập huấn kỹ năng Nghi thức Đội và nghiệp vụ tự quản cho Ban Chỉ huy Liên đội, Ban Chỉ huy Chi đội khối 4-5 và đội ngũ Phụ trách Sao Nhi đồng của Trường Tiểu học Lê Thế Hiếu. Tập trung hướng dẫn: (1) Động tác thắt - tháo khăn quàng đỏ, chào kiểu Đội viên đúng chuẩn; (2) Khẩu lệnh và động tác chỉ huy đội hình hàng dọc, hàng ngang, chữ U, vòng tròn; (3) Cách xử lý các lỗi thường gặp khi chỉ huy dưới sân trường.",
+                toneIndex: 0,
+                formatIndex: 2
+            },
+            {
+                id: "tpl-6",
+                badge: "Truyền thông & Học liệu số",
+                title: "Bài đăng Fanpage & Prompt tạo Backdrop Ngày hội Măng non",
+                desc: "Viết bài truyền thông Fanpage Liên đội kèm câu lệnh AI vẽ phông nền sân khấu tươi sáng chuẩn nhận diện Đội.",
+                cat: "truyen-thong",
+                subtask: "Bài đăng Fanpage Liên đội tuyên truyền hoạt động / gương người tốt việc tốt",
+                theme: "Tháng 5 - Chủ điểm: Bác Hồ kính yêu – Tự hào Đội ta lớn lên cùng đất nước (15/5 & 19/5)",
+                targets: ["Học sinh toàn trường (Khối 1–5)", "Giáo viên chủ nhiệm (Phụ trách Chi đội / Sao Nhi đồng)"],
+                location: "Không gian trực tuyến (Fanpage Liên đội / Zalo)",
+                duration: "Đăng tải ngay sau sự kiện",
+                scale: "Toàn thể phụ huynh, giáo viên và học sinh nhà trường",
+                budget: "0 đồng (Sử dụng công cụ AI miễn phí)",
+                staff: "GV Tổng phụ trách Đội phụ trách truyền thông",
+                props: "Hình ảnh hoạt động thực tế của học sinh, máy tính/điện thoại",
+                detail: "Soạn gói truyền thông số cho Liên đội Trường Tiểu học Lê Thế Hiếu (xã Cam Lộ, tỉnh Quảng Trị) gồm: (1) 01 bài đăng Fanpage Liên đội truyền cảm hứng, bố cục rõ ràng có icon phù hợp, tôn vinh tinh thần thiếu nhi học tập và rèn luyện; (2) 01 kịch bản ghép video ngắn 60 giây trên CapCut; (3) 02 câu lệnh (Prompt) chi tiết để tạo hình ảnh Poster/Backdrop sân khấu thiếu nhi quàng khăn đỏ tươi sáng, trang trọng.",
+                toneIndex: 1,
+                formatIndex: 3
+            }
+        ];
+
+        // 3. BIẾN TRẠNG THÁI HIỆN TẠI
+        let currentState = {
+            category: "van-ban",
+            subtask: CATEGORIES_DATA["van-ban"].subtasks[0],
+            tone: "Kết hợp hài hòa cả hai: Phần khung kế hoạch/phân công chuẩn mực hành chính sư phạm; phần lời dẫn, trò chơi và tương tác học sinh vui tươi, truyền cảm hứng.",
+            format: "Văn bản chuẩn thể thức Nghị định 30/2020/NĐ-CP và hướng dẫn của Hội đồng Đội (có Quốc hiệu, Tiêu ngữ, tên Liên đội, mục đích - yêu cầu, nội dung, tổ chức thực hiện, nơi nhận)."
+        };
+
+        const STORAGE_KEY = "LPN_TRO_LY_CONG_TAC_DOI_LE_THE_HIEU_HISTORY_V1";
+
+        // 4. KHỞI TẠO ĐỒNG HỒ & CHỦ ĐIỂM THÁNG HIỆN TẠI
+        function initClockAndThemeBanner() {
+            const monthThemes = {
+                1: "Tháng 1: Mừng Đảng – Mừng Xuân",
+                2: "Tháng 2: Mừng Đảng – Mừng Xuân đổi mới",
+                3: "Tháng 3: Tiến bước lên Đoàn (26/3)",
+                4: "Tháng 4: Hòa bình & Hữu nghị (30/4)",
+                5: "Tháng 5: Bác Hồ kính yêu – Đội ta lớn lên (15/5)",
+                6: "Tháng 6: Hè vui an toàn – Rèn kỹ năng",
+                7: "Tháng 7: Đền ơn đáp nghĩa – Hè an toàn",
+                8: "Tháng 8: Chuẩn bị năm học mới",
+                9: "Tháng 9: Truyền thống nhà trường",
+                10: "Tháng 10: Chăm ngoan học giỏi",
+                11: "Tháng 11: Tôn sư trọng đạo (20/11)",
+                12: "Tháng 12: Uống nước nhớ nguồn (22/12)"
+            };
+
+            function updateClock() {
+                const now = new Date();
+                const days = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+                const dName = days[now.getDay()];
+                const dd = String(now.getDate()).padStart(2, '0');
+                const mm = String(now.getMonth() + 1).padStart(2, '0');
+                const yyyy = now.getFullYear();
+                const hh = String(now.getHours()).padStart(2, '0');
+                const min = String(now.getMinutes()).padStart(2, '0');
+                document.getElementById("liveClock").textContent = `${dName}, ${dd}/${mm}/${yyyy} • ${hh}:${min}`;
+                document.getElementById("currentMonthFocus").textContent = monthThemes[now.getMonth() + 1] || "Năm học mới";
+            }
+            updateClock();
+            setInterval(updateClock, 15000);
+        }
+
+        // 5. HIỂN THỊ DANH SÁCH TÁC VỤ CON THEO NHÓM NGHIỆP VỤ
+        function renderSubtasks(catKey, selectedSubtask = null) {
+            const catObj = CATEGORIES_DATA[catKey];
+            document.getElementById("activeCategoryLabel").textContent = catObj.name;
+            const listEl = document.getElementById("subtaskList");
+            listEl.innerHTML = "";
+
+            const activeSub = selectedSubtask || catObj.subtasks[0];
+            currentState.subtask = activeSub;
+
+            catObj.subtasks.forEach(sub => {
+                const chip = document.createElement("button");
+                chip.type = "button";
+                chip.className = "subtask-chip" + (sub === activeSub ? " active" : "");
+                chip.innerHTML = `<i class="fa-solid ${sub === activeSub ? 'fa-circle-check' : 'fa-circle-dot'}"></i> <span>${sub}</span>`;
+                chip.addEventListener("click", () => {
+                    currentState.subtask = sub;
+                    renderSubtasks(catKey, sub);
+                    generatePromptRealtime();
+                });
+                listEl.appendChild(chip);
+            });
+        }
+
+        // 6. THU THẬP DỮ LIỆU TỪ FORM VÀ GHÉP PROMPT THỜI GIAN THỰC
+        function getSelectedTargets() {
+            const chips = document.querySelectorAll("#targetGroup .check-chip.selected");
+            const arr = Array.from(chips).map(c => c.getAttribute("data-val"));
+            return arr.length > 0 ? arr.join("; ") : "[Cần điền: đối tượng học sinh/giáo viên tham gia]";
+        }
+
+        function getSelectedTheme() {
+            const sel = document.getElementById("themeSelect").value;
+            if (sel === "custom") {
+                const customVal = document.getElementById("customThemeInput").value.trim();
+                return customVal || "[Cần điền: tên chủ điểm / đợt thi đua cụ thể]";
+            }
+            return sel;
+        }
+
+        function generatePromptRealtime() {
+            const catObj = CATEGORIES_DATA[currentState.category];
+            const unitName = document.getElementById("unitName").value.trim() || "Liên đội Trường Tiểu học Lê Thế Hiếu, xã Cam Lộ, tỉnh Quảng Trị";
+            const themeText = getSelectedTheme();
+            const targetsText = getSelectedTargets();
+
+            const location = document.getElementById("condLocation").value;
+            const duration = document.getElementById("condDuration").value.trim() || "[Cần điền: thời lượng phút]";
+            const scale = document.getElementById("condScale").value.trim() || "[Cần điền: số lượng học sinh/lớp]";
+            const budget = document.getElementById("condBudget").value.trim() || "[Cần điền: nguồn kinh phí]";
+            const staff = document.getElementById("condStaff").value.trim() || "Giáo viên Tổng phụ trách Đội, BCH Liên đội, GVCN";
+            const props = document.getElementById("condProps").value.trim() || "[Cần điền: thiết bị, đạo cụ hiện có]";
+            const detailReq = document.getElementById("detailRequest").value.trim() || "[Cần điền: yêu cầu cụ thể của hoạt động]";
+
+            const promptText = `# VAI TRÒ (ROLE)
+Bạn là ${catObj.roleExpert}. Bạn am hiểu sâu sắc Điều lệ Đội TNTP Hồ Chí Minh, Nghi thức Đội, Chương trình Rèn luyện Đội viên, đặc điểm tâm sinh lý học sinh bậc Tiểu học (từ lớp 1 đến lớp 5) và văn phong sư phạm chuẩn mực.
+
+# NGỮ CẢNH THỰC TẾ (CONTEXT)
+- Đơn vị tổ chức/áp dụng: ${unitName} (trực thuộc Hội đồng Đội xã Cam Lộ, tỉnh Quảng Trị).
+- Nhóm nghiệp vụ: ${catObj.name}.
+- Tác vụ cần thực hiện: ${currentState.subtask}.
+- Thời gian & Chủ điểm năm học: ${themeText}.
+- Đối tượng tham gia: ${targetsText}.
+- Điều kiện thực tế tại nhà trường:
+  + Địa điểm tổ chức: ${location}.
+  + Thời lượng thực hiện: ${duration}.
+  + Quy mô tham dự: ${scale}.
+  + Kinh phí & Nguồn lực: ${budget}.
+  + Nhân sự phối hợp: ${staff}.
+  + Thiết bị, đạo cụ hiện có: ${props}.
+
+# NHIỆM VỤ TRỌNG TÂM (TASK)
+Hãy xây dựng trọn vẹn, chi tiết và khả thi nhất sản phẩm: "${currentState.subtask}" phục vụ trực tiếp cho công tác Đội tại ${unitName}.
+Yêu cầu trọng tâm cần giải quyết:
+${detailReq}
+
+# YÊU CẦU CHUYÊN MÔN & QUY TẮC BẮT BUỘC (CONSTRAINTS)
+1. Chuẩn nghiệp vụ Đội TNTP Hồ Chí Minh: Sử dụng chính xác thuật ngữ công tác Đội bậc Tiểu học (Liên đội, Chi đội dành cho khối 4-5 hoặc lớp 3 đã kết nạp; Sao Nhi đồng và Phụ trách Sao dành cho khối 1-3; Ban Chỉ huy Liên đội/Chi đội; Giáo viên Tổng phụ trách Đội). Đảm bảo đúng quy trình Nghi thức Đội.
+2. Bám sát thực tiễn địa phương & nhà trường: Phù hợp với điều kiện cơ sở vật chất thực tế đã nêu; lồng ghép tự nhiên niềm tự hào truyền thống Trường Tiểu học Lê Thế Hiếu và quê hương Cam Lộ, Quảng Trị.
+3. Quy tắc dữ liệu trung thực: Tuyệt đối KHÔNG tự bịa đặt số liệu thống kê, ngày tháng cụ thể, kinh phí hay họ tên cá nhân khi chưa được cung cấp. Mọi thông tin số liệu cần người dùng bổ sung phải được đánh dấu rõ ràng theo đúng cú pháp: [Cần điền: mô tả thông tin cần điền].
+4. Chống sáo rỗng, lý thuyết suông: Không viết chung chung. Mỗi phần việc phải chỉ rõ: Ai làm? Làm như thế nào? Cần chuẩn bị gì? Lời nói/khẩu lệnh cụ thể ra sao để giáo viên và học sinh áp dụng được ngay.
+5. Văn phong trình bày: ${currentState.tone}
+6. Định dạng đầu ra bắt buộc: ${currentState.format}`;
+
+            const outputEl = document.getElementById("promptOutput");
+            outputEl.textContent = promptText;
+            document.getElementById("charCount").textContent = `${promptText.length.toLocaleString('vi-VN')} ký tự`;
+
+            renderStructurePreview(catObj, unitName, themeText, targetsText, location, duration);
+        }
+
+        // 7. HIỂN THỊ KHUNG XEM TRƯỚC CẤU TRÚC SẢN PHẨM
+        function renderStructurePreview(catObj, unitName, themeText, targetsText, location, duration) {
+            const previewEl = document.getElementById("structurePreviewArea");
+            const outlineHtml = catObj.outline.map(item => `
+                <li class="preview-outline-item">
+                    <i class="fa-solid fa-check-double"></i>
+                    <span>${item}</span>
+                </li>
+            `).join("");
+
+            previewEl.innerHTML = `
+                <div class="preview-doc-card">
+                    <div class="preview-doc-header">
+                        <div>
+                            <div style="font-weight: 700;">HỘI ĐỒNG ĐỘI XÃ CAM LỘ</div>
+                            <div style="font-weight: 800; color: var(--red-primary);">LIÊN ĐỘI TRƯỜNG TH LÊ THẾ HIẾU</div>
+                            <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">Số: [Cần điền: số]/KH-LĐ</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 800;">ĐỘI TNTP HỒ CHÍ MINH</div>
+                            <div style="font-style: italic; font-size: 0.72rem; margin-top: 4px;">Cam Lộ, ngày [Cần điền: ngày] tháng [Cần điền: tháng] năm 202...</div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-bottom: 14px;">
+                        <span class="tpl-badge" style="margin-bottom: 6px;"><i class="fa-solid fa-layer-group"></i> Cấu trúc sản phẩm AI sẽ tạo ra</span>
+                        <h4 style="font-size: 0.95rem; color: var(--blue-dark); text-transform: uppercase;">${currentState.subtask}</h4>
+                        <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">${themeText}</div>
+                    </div>
+
+                    <div style="font-size: 0.78rem; background: #FFFBEB; border: 1px solid #FDE68A; padding: 10px 12px; border-radius: 8px; margin-bottom: 12px;">
+                        <div><strong>• Đơn vị:</strong> ${unitName}</div>
+                        <div><strong>• Đối tượng:</strong> ${targetsText}</div>
+                        <div><strong>• Địa điểm & Thời lượng:</strong> ${location} (${duration})</div>
+                    </div>
+
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
+                        <i class="fa-solid fa-list-ol" style="color: var(--red-primary);"></i> Khung bố cục chi tiết AI sẽ triển khai:
+                    </div>
+                    <ul class="preview-outline-list">
+                        ${outlineHtml}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // 8. NẠP MẪU TÌNH HUỐNG (PRESET TEMPLATE) VÀO FORM
+        function applyTemplateToForm(tpl) {
+            // 1. Category
+            currentState.category = tpl.cat;
+            document.querySelectorAll("#categoryTabs .cat-tab").forEach(tab => {
+                tab.classList.toggle("active", tab.getAttribute("data-cat") === tpl.cat);
+            });
+            renderSubtasks(tpl.cat, tpl.subtask);
+
+            // 2. Theme
+            const themeSelect = document.getElementById("themeSelect");
+            const customInput = document.getElementById("customThemeInput");
+            let foundTheme = false;
+            Array.from(themeSelect.options).forEach(opt => {
+                if (opt.value === tpl.theme) foundTheme = true;
+            });
+            if (foundTheme) {
+                themeSelect.value = tpl.theme;
+                customInput.style.display = "none";
+            } else {
+                themeSelect.value = "custom";
+                customInput.style.display = "block";
+                customInput.value = tpl.theme;
+            }
+
+            // 3. Targets
+            document.querySelectorAll("#targetGroup .check-chip").forEach(chip => {
+                const val = chip.getAttribute("data-val");
+                const isSelected = tpl.targets.includes(val);
+                chip.classList.toggle("selected", isSelected);
+                const icon = chip.querySelector("i");
+                icon.className = isSelected ? "fa-solid fa-square-check" : "fa-regular fa-square";
+            });
+
+            // 4. Practical Conditions
+            document.getElementById("condLocation").value = tpl.location;
+            document.getElementById("condDuration").value = tpl.duration;
+            document.getElementById("condScale").value = tpl.scale;
+            document.getElementById("condBudget").value = tpl.budget;
+            document.getElementById("condStaff").value = tpl.staff;
+            document.getElementById("condProps").value = tpl.props;
+            document.getElementById("detailRequest").value = tpl.detail;
+
+            // 5. Tone
+            const toneCards = document.querySelectorAll("#toneOptions .opt-card");
+            toneCards.forEach((card, idx) => {
+                const active = idx === tpl.toneIndex;
+                card.classList.toggle("active", active);
+                if (active) currentState.tone = card.getAttribute("data-tone");
+            });
+
+            // 6. Format
+            const formatCards = document.querySelectorAll("#formatOptions .opt-card");
+            formatCards.forEach((card, idx) => {
+                const active = idx === tpl.formatIndex;
+                card.classList.toggle("active", active);
+                if (active) currentState.format = card.getAttribute("data-format");
+            });
+
+            generatePromptRealtime();
+            showToast(`Đã nạp mẫu: "${tpl.title}"`);
+        }
+
+        // 9. HIỂN THỊ KHO MẪU CÔNG TÁC ĐỘI
+        function renderPresetTemplates() {
+            const grid = document.getElementById("presetTemplatesGrid");
+            grid.innerHTML = "";
+            PRESET_TEMPLATES.forEach(tpl => {
+                const card = document.createElement("div");
+                card.className = "tpl-card";
+                card.innerHTML = `
+                    <div>
+                        <span class="tpl-badge"><i class="fa-solid fa-star"></i> ${tpl.badge}</span>
+                        <div class="tpl-title">${tpl.title}</div>
+                        <div class="tpl-desc" style="margin-top: 4px;">${tpl.desc}</div>
+                    </div>
+                    <div class="tpl-footer">
+                        <span style="font-size: 0.73rem; color: var(--text-muted); font-weight: 600;">
+                            <i class="fa-regular fa-clock"></i> ${tpl.duration}
+                        </span>
+                        <button type="button" class="btn btn-red" style="padding: 5px 11px; font-size: 0.76rem;">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Áp dụng mẫu
+                        </button>
+                    </div>
+                `;
+                card.querySelector("button").addEventListener("click", () => {
+                    applyTemplateToForm(tpl);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+                grid.appendChild(card);
+            });
+        }
+
+        // 10. QUẢN LÝ LỊCH SỬ LOCALSTORAGE
+        function getSavedHistory() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveCurrentToHistory() {
+            const promptText = document.getElementById("promptOutput").textContent.trim();
+            if (!promptText) return;
+
+            const history = getSavedHistory();
+            const now = new Date();
+            const timeStr = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+            const newItem = {
+                id: "hist_" + Date.now(),
+                title: currentState.subtask,
+                categoryName: CATEGORIES_DATA[currentState.category].name,
+                time: timeStr,
+                prompt: promptText
+            };
+
+            history.unshift(newItem);
+            if (history.length > 20) history.pop();
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+            renderHistoryList();
+            showToast("Đã lưu câu lệnh vào bộ nhớ trình duyệt!");
+        }
+
+        function renderHistoryList() {
+            const listEl = document.getElementById("historyList");
+            const history = getSavedHistory();
+
+            if (history.length === 0) {
+                listEl.innerHTML = `
+                    <div style="text-align: center; padding: 28px 14px; color: var(--text-muted); font-size: 0.83rem; border: 1.5px dashed #CBD5E1; border-radius: 10px;">
+                        <i class="fa-regular fa-folder-open" style="font-size: 1.6rem; color: #94A3B8; margin-bottom: 8px; display: block;"></i>
+                        Chưa có câu lệnh nào được lưu.<br>Bấm nút <strong>"Lưu vào lịch sử"</strong> để lưu lại các câu lệnh tâm đắc dùng cho lần sau.
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = "";
+            history.forEach(item => {
+                const row = document.createElement("div");
+                row.className = "history-item";
+                row.innerHTML = `
+                    <div class="hist-info">
+                        <div class="hist-title" title="${item.title}">${item.title}</div>
+                        <div class="hist-meta">
+                            <span><i class="fa-solid fa-tag"></i> ${item.categoryName}</span>
+                            <span>•</span>
+                            <span><i class="fa-regular fa-clock"></i> ${item.time}</span>
+                        </div>
+                    </div>
+                    <div class="hist-actions">
+                        <button type="button" class="icon-btn btn-load" title="Nạp lại câu lệnh này">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+                        <button type="button" class="icon-btn btn-copy" title="Sao chép nhanh">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                        <button type="button" class="icon-btn del btn-del" title="Xóa">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                `;
+
+                row.querySelector(".btn-load").addEventListener("click", () => {
+                    document.getElementById("promptOutput").textContent = item.prompt;
+                    document.getElementById("charCount").textContent = `${item.prompt.length.toLocaleString('vi-VN')} ký tự`;
+                    showToast(`Đã nạp lại: "${item.title}"`);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+
+                row.querySelector(".btn-copy").addEventListener("click", () => {
+                    copyTextToClipboard(item.prompt);
+                });
+
+                row.querySelector(".btn-del").addEventListener("click", () => {
+                    const updated = getSavedHistory().filter(h => h.id !== item.id);
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+                    renderHistoryList();
+                    showToast("Đã xóa mục khỏi lịch sử.");
+                });
+
+                listEl.appendChild(row);
+            });
+        }
+
+        // 11. SAO CHÉP & XUẤT TỆP (.TXT, .DOC)
+        function copyTextToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => triggerCopySuccess());
+            } else {
+                const ta = document.createElement("textarea");
+                ta.value = text;
+                ta.style.position = "fixed";
+                ta.style.left = "-9999px";
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                document.execCommand("copy");
+                document.body.removeChild(ta);
+                triggerCopySuccess();
+            }
+        }
+
+        function triggerCopySuccess() {
+            const btn = document.getElementById("btnCopyPrompt");
+            const txt = document.getElementById("copyBtnText");
+            btn.classList.add("copied");
+            txt.textContent = "ĐÃ SAO CHÉP! DÁN NGAY VÀO AI";
+            showToast("Đã sao chép câu lệnh! Hãy dán (Ctrl+V) vào Gemini hoặc ChatGPT.");
+            setTimeout(() => {
+                btn.classList.remove("copied");
+                txt.textContent = "SAO CHÉP CÂU LỆNH (1 CHẠM)";
+            }, 2600);
+        }
+
+        function downloadFile(format) {
+            const content = document.getElementById("promptOutput").textContent;
+            const slug = currentState.subtask
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-zA-Z0-9]+/g, "_")
+                .replace(/^_|_$/g, "")
+                .toLowerCase();
+
+            if (format === "txt") {
+                const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `Prompt_CongTacDoi_TH_LeTheHieu_${slug}.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast("Đã tải xuống tệp .TXT thành công!");
+            } else if (format === "doc") {
+                const htmlDoc = `
+                    <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                    <head><meta charset='utf-8'><title>${currentState.subtask}</title>
+                    <style>
+                        body { font-family: 'Times New Roman', serif; font-size: 13pt; line-height: 1.5; }
+                        h1 { color: #B71C1C; font-size: 15pt; text-align: center; }
+                        pre { font-family: 'Times New Roman', serif; font-size: 13pt; white-space: pre-wrap; }
+                    </style>
+                    </head>
+                    <body>
+                        <h1>CÂU LỆNH (PROMPT) TRỢ LÝ SỐ CÔNG TÁC ĐỘI<br>LIÊN ĐỘI TRƯỜNG TIỂU HỌC LÊ THẾ HIẾU - XÃ CAM LỘ, TỈNH QUẢNG TRỊ</h1>
+                        <hr>
+                        <pre>${content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre>
+                    </body></html>
+                `;
+                const blob = new Blob(['\ufeff', htmlDoc], { type: "application/msword;charset=utf-8" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `Prompt_CongTacDoi_TH_LeTheHieu_${slug}.doc`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast("Đã tải xuống tệp Word (.DOC) thành công!");
+            }
+        }
+
+        function showToast(msg) {
+            const container = document.getElementById("toastContainer");
+            const toast = document.createElement("div");
+            toast.className = "toast";
+            toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--yellow-star); font-size: 1.05rem;"></i> <span>${msg}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transform = "translateX(40px)";
+                toast.style.transition = "all 0.25s ease";
+                setTimeout(() => toast.remove(), 250);
+            }, 3000);
+        }
+
+        // 12. GẮN SỰ KIỆN TƯƠNG TÁC
+        document.addEventListener("DOMContentLoaded", () => {
+            initClockAndThemeBanner();
+            renderSubtasks(currentState.category);
+            renderPresetTemplates();
+            renderHistoryList();
+            generatePromptRealtime();
+
+            // Category tabs
+            document.querySelectorAll("#categoryTabs .cat-tab").forEach(tab => {
+                tab.addEventListener("click", () => {
+                    document.querySelectorAll("#categoryTabs .cat-tab").forEach(t => t.classList.remove("active"));
+                    tab.classList.add("active");
+                    const catKey = tab.getAttribute("data-cat");
+                    currentState.category = catKey;
+                    renderSubtasks(catKey);
+                    generatePromptRealtime();
+                });
+            });
+
+            // Theme select change
+            document.getElementById("themeSelect").addEventListener("change", (e) => {
+                const customInput = document.getElementById("customThemeInput");
+                if (e.target.value === "custom") {
+                    customInput.style.display = "block";
+                    customInput.focus();
+                } else {
+                    customInput.style.display = "none";
+                }
+                generatePromptRealtime();
+            });
+
+            // Real-time input listeners
+            const inputIds = ["unitName", "customThemeInput", "condLocation", "condDuration", "condScale", "condBudget", "condStaff", "condProps", "detailRequest"];
+            inputIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener("input", generatePromptRealtime);
+                    el.addEventListener("change", generatePromptRealtime);
+                }
+            });
+
+            // Multi-select target chips
+            document.querySelectorAll("#targetGroup .check-chip").forEach(chip => {
+                chip.addEventListener("click", () => {
+                    chip.classList.toggle("selected");
+                    const isSel = chip.classList.contains("selected");
+                    const icon = chip.querySelector("i");
+                    icon.className = isSel ? "fa-solid fa-square-check" : "fa-regular fa-square";
+                    generatePromptRealtime();
+                });
+            });
+
+            // Quick insert suggestion tags
+            document.querySelectorAll("#quickTagsBar .quick-tag").forEach(tag => {
+                tag.addEventListener("click", () => {
+                    const insertText = tag.getAttribute("data-insert");
+                    const ta = document.getElementById("detailRequest");
+                    const cur = ta.value.trim();
+                    if (!cur.includes(insertText)) {
+                        ta.value = cur ? (cur + "\n- " + insertText) : ("- " + insertText);
+                        generatePromptRealtime();
+                        showToast("Đã chèn gợi ý vào yêu cầu chi tiết!");
+                    }
+                });
+            });
+
+            // Tone option cards
+            document.querySelectorAll("#toneOptions .opt-card").forEach(card => {
+                card.addEventListener("click", () => {
+                    document.querySelectorAll("#toneOptions .opt-card").forEach(c => c.classList.remove("active"));
+                    card.classList.add("active");
+                    currentState.tone = card.getAttribute("data-tone");
+                    generatePromptRealtime();
+                });
+            });
+
+            // Format option cards
+            document.querySelectorAll("#formatOptions .opt-card").forEach(card => {
+                card.addEventListener("click", () => {
+                    document.querySelectorAll("#formatOptions .opt-card").forEach(c => c.classList.remove("active"));
+                    card.classList.add("active");
+                    currentState.format = card.getAttribute("data-format");
+                    generatePromptRealtime();
+                });
+            });
+
+            // Output Switch Tabs (Prompt vs Preview)
+            const tabBtnPrompt = document.getElementById("tabBtnPrompt");
+            const tabBtnPreview = document.getElementById("tabBtnPreview");
+            const promptBoxWrapper = document.getElementById("promptBoxWrapper");
+            const structurePreviewArea = document.getElementById("structurePreviewArea");
+
+            tabBtnPrompt.addEventListener("click", () => {
+                tabBtnPrompt.classList.add("active");
+                tabBtnPreview.classList.remove("active");
+                promptBoxWrapper.classList.remove("hidden");
+                structurePreviewArea.classList.remove("active");
+            });
+
+            tabBtnPreview.addEventListener("click", () => {
+                tabBtnPreview.classList.add("active");
+                tabBtnPrompt.classList.remove("active");
+                promptBoxWrapper.classList.add("hidden");
+                structurePreviewArea.classList.add("active");
+            });
+
+            // Demo Buttons
+            document.getElementById("btnFillDemo1").addEventListener("click", () => {
+                applyTemplateToForm(PRESET_TEMPLATES[0]);
+            });
+
+            document.getElementById("btnFillDemo2").addEventListener("click", () => {
+                applyTemplateToForm(PRESET_TEMPLATES[1]);
+            });
+
+            // Reset Form Button
+            document.getElementById("btnResetForm").addEventListener("click", () => {
+                document.getElementById("unitName").value = "Liên đội Trường Tiểu học Lê Thế Hiếu, xã Cam Lộ, tỉnh Quảng Trị";
+                document.getElementById("detailRequest").value = "";
+                document.getElementById("condScale").value = "[Cần điền: tổng số học sinh/lớp]";
+                generatePromptRealtime();
+                showToast("Đã làm mới bảng thiết lập thông tin!");
+            });
+
+            // Copy & Export & Save History
+            document.getElementById("btnCopyPrompt").addEventListener("click", () => {
+                const txt = document.getElementById("promptOutput").textContent;
+                copyTextToClipboard(txt);
+            });
+
+            document.getElementById("btnSaveHistory").addEventListener("click", saveCurrentToHistory);
+            document.getElementById("btnDownloadTxt").addEventListener("click", () => downloadFile("txt"));
+            document.getElementById("btnDownloadDoc").addEventListener("click", () => downloadFile("doc"));
+
+            document.getElementById("btnClearHistory").addEventListener("click", () => {
+                localStorage.removeItem(STORAGE_KEY);
+                renderHistoryList();
+                showToast("Đã xóa toàn bộ lịch sử lưu trữ.");
+            });
+        });
+    </script>
+</body>
+</html>
